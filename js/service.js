@@ -2,14 +2,15 @@
 
 const STORAGE_KEY = 'imgs'
 
-var gImgs = _createImgs()
+var gImgs = []
+_createImgs()
 
 // happy sad sarcastic crazy funny
 function _createImgs() {
-  var imgs = loadFromStorage(STORAGE_KEY)
+  gImgs = loadFromStorage(STORAGE_KEY)
 
-  if (!imgs || !imgs.length) {
-    imgs = [
+  if (!gImgs || !gImgs.length) {
+    gImgs = [
       { id: _nextIdx(), url: 'meme-imgs/001.jpg', keywords: ['fuuny'] },
       { id: _nextIdx(), url: 'meme-imgs/002.jpg', keywords: ['fuuny'] },
       { id: _nextIdx(), url: 'meme-imgs/003.jpg', keywords: ['fuuny'] },
@@ -31,9 +32,26 @@ function _createImgs() {
       { id: _nextIdx(), url: 'meme-imgs/019.jpg', keywords: ['fuuny'] },
       { id: _nextIdx(), url: 'meme-imgs/020.jpg', keywords: ['fuuny'] },
     ]
-
-    saveToStorage(STORAGE_KEY, imgs)
   }
+  _saveImgs()
+}
 
-  return imgs
+function addImg(url, keyWords) {
+  const newImg = _createImg(url, keyWords)
+  gImgs.unshift(newImg)
+
+  _saveImgs()
+  return newImg
+}
+
+function _createImg(url = 'meme-imgs/020.jpg', keywords = ['fuuny']) {
+  return {
+    id: _nextIdx(),
+    url,
+    keywords,
+  }
+}
+
+function _saveImgs() {
+  saveToStorage(STORAGE_KEY, gImgs)
 }
