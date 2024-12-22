@@ -1,64 +1,15 @@
-* {
-  box-sizing: border-box;
-}
+/* SETUP */
+@import url('css/setup/typography.css');
+@import url('css/setup/vars.css');
 
-:root {
-  --clr-header: rgb(109, 110, 105);
-}
-body {
-  margin: 0;
-}
+/* BASICS */
+@import url('css/basics/base.css');
+@import url('css/basics/helpers.css');
+@import url('css/basics/layout.css');
 
-.clean-list {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
+/* COMPONENTS */
+@import url('css/components/main-header.css');
+@import url('css/components/gallery.css');
 
-.main-layout {
-  display: grid;
-  grid-column: 3;
-  grid-template-columns: minmax(20px, 1fr) minmax(auto, 980px) minmax(20px, 1fr);
-}
-
-.main-layout > * {
-  grid-column: 2;
-}
-
-.main-header {
-  padding: 10px;
-  background-color: var(--clr-header);
-}
-.gallery {
-  margin: 0 auto;
-}
-
-.gallery-layout {
-  column-count: 3;
-  column-gap: 1em;
-  max-width: 900px;
-}
-.gallery img {
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.filtering {
-  margin-block-end: 1em;
-}
-
-.flex {
-  display: flex;
-}
-
-.flex.justify-between {
-  justify-content: space-between;
-}
-
-.flex.align-center {
-  align-items: center;
-}
-
-img {
-  width: 100%;
-}
+/* MQ */
+@import url('css/setup/mq.css');

@@ -1,0 +1,21 @@
+.main-layout {
+  display: grid;
+  grid-column: 3;
+  grid-template-columns: minmax(20px, 1fr) minmax(auto, 980px) minmax(20px, 1fr);
+}
+
+.main-layout {
+  display: grid;
+  grid-column: 3;
+  grid-template-columns: minmax(20px, 1fr) minmax(auto, 980px) minmax(20px, 1fr);
+}
+
+.main-layout > * {
+  grid-column: 2;
+}
+
+.gallery-layout {
+  column-count: 3;
+  column-gap: 1em;
+  max-width: 900px;
+}
