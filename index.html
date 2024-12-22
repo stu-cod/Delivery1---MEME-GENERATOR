@@ -8,27 +8,44 @@
     <link rel="stylesheet" href="main.css">
 </head>
 
-<body onload="onInit()">
-    <header>
-        <div class="main-header">
+<body class="main-layout" onload="onInit()">
+    <header class="main-layout">
+        <div class="main-header flex justify-between align-center">
             <h2 class="logo">StuMEME</h2>
-            <ul>
+            <ul class="clean-list flex clean-list">
                 <li>
-                    <button class="">gallery</button>
+                    <button>gallery</button>
                 </li>
                 <li>
-                    <button class="">saved</button>
+                    <button>saved</button>
 
                 </li>
                 <li>
-                    <button class="">about</button>
+                    <button>about</button>
                 </li>
             </ul>
 
         </div>
     </header>
 
-    <section class="gallery"></section>
+    <section class="gallery">
+        <section class="filtering">
+            <input class="search" type="text" oninput="" />
+            <button class="search" onclick="">
+                search
+            </button>
+
+            <button>happy</button>
+            <button>sad</button>
+            <button>sarcastic</button>
+            <button>crazy</button>
+            <button>funny</button>
+        </section>
+
+        <div class="imgs gallery-layout">
+            <img src="meme-imgs/003.jpg">
+        </div>
+    </section>
 
     <section class="editor"></section>
 
@@ -39,7 +56,9 @@
     </section>
 
 </body>
-
-<script src="main.js"></script>
+<script src="js/storge-service.js"></script>
+<script src="js/util.js"></script>
+<script src="js/service.js"></script>
+<script src="js/controller.js"></script>
 
 </html>
