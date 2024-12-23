@@ -1,14 +1,17 @@
 'use strict'
 
-function onInit() {
-  renderGallery()
-}
-
 function renderGallery() {
-  const strHtmls = gImgs.map((img) => ` <img src="${img.url}">`)
+  const strHtmls = gImgs.map((img) => {
+    return ` <img onclick="onImgClick('${img.id}')" src="${img.url}">`
+  })
 
   const elImgs = document.querySelector('.imgs')
   elImgs.innerHTML = strHtmls.join('')
+}
+
+function onImgClick(imgId) {
+  addMeme(imgId)
+  renderMeme()
 }
 
 function onImgInput(ev) {}
@@ -20,5 +23,4 @@ function onAddImg() {
   var url = 'meme-imgs/020.jpg'
   addImg(url, keyWord)
   renderGallery()
-  console.log(gImgs)
 }

@@ -2,7 +2,7 @@
 
 const STORAGE_KEY = 'imgs'
 
-var gImgs = []
+let gImgs = []
 _createImgs()
 
 // happy sad sarcastic crazy funny
