@@ -58,3 +58,8 @@ function editTxt(elTxt) {
   setLineTxt(elTxt)
   renderMeme()
 }
+
+function onDownloadMeme(elLink) {
+  const imgContent = gElCanvas.toDataURL('image/jpeg')
+  elLink.href = imgContent
+}
