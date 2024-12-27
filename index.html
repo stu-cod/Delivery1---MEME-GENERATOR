@@ -28,10 +28,23 @@
         </div>
     </header>
 
-    <div class="canvas-container">
-        <canvas width="400" height="400">
-        </canvas>
-    </div>
+    <section class="meme-editor">
+        <div class="canvas-container">
+            <canvas width="400" height="400">
+            </canvas>
+        </div>
+        <form onsubmit="onSubmit(event)">
+            <label for="text">Edit text:</label>
+            <input oninput="editTxt(value)" type="text" id="text" placeholder="Edit text here">
+        </form>
+
+        <section class="share">
+            <button>save</button>
+            <button>download</button>
+            <button>share on facebook</button>
+        </section>
+    </section>
+
     <section class="gallery">
         <section class="filtering">
             <input class="search" type="text" oninput="" />
@@ -57,11 +70,7 @@
 
     <section class="editor"></section>
 
-    <section class="share">
-        <button>save</button>
-        <button>download</button>
-        <button>share on facebook</button>
-    </section>
+
 
 </body>
 <script src="js/storge-service.js"></script>

@@ -5,6 +5,7 @@ const gCtx = gElCanvas.getContext('2d')
 
 function onInit() {
   renderGallery()
+  console.log()
 }
 
 function renderMeme() {
@@ -12,13 +13,14 @@ function renderMeme() {
   drewImg(meme)
 }
 
-function drewImg({ imgUrl }) {
+function drewImg({ imgUrl, lines }) {
   const img = new Image()
   img.src = imgUrl
   img.onload = () => {
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-    drawText('hey', 200, 200)
+
+    drawText(lines[0].txt, gElCanvas.width / 2, gElCanvas.height / 2)
   }
 }
 
@@ -46,4 +48,13 @@ function drawFrameAroundText(textBounds, padding = 10) {
 
   gCtx.strokeStyle = 'black'
   gCtx.strokeRect(boxX, boxY, boxWidth, boxHeight)
+}
+
+function onSubmit(ev) {
+  ev.preventDefault()
+}
+
+function editTxt(elTxt) {
+  setLineTxt(elTxt)
+  renderMeme()
 }
