@@ -36,11 +36,35 @@ function drawText(x, y, lines) {
     const txtWidth = txtMetrics.width
     const txtHeight = size
 
+    line.posX = x
+    line.posY = y
+    line.width = txtWidth
+    line.height = txtHeight
+
     if (idx === gMeme.selectedLineIdx) {
       drawFrameAroundText(x, y, txtWidth, txtHeight)
     }
   })
 }
+
+gElCanvas.addEventListener('click', function (event) {
+  gMeme.lines.forEach((line, idx) => {
+    const { posX: x, posY: y, width, height } = line
+    const rect = gElCanvas.getBoundingClientRect()
+    const clickX = event.clientX - rect.left
+    const clickY = event.clientY - rect.top
+
+    if (
+      clickX >= x &&
+      clickX <= x + width &&
+      clickY >= y - height &&
+      clickY <= y
+    ) {
+      selectedTxtLine(idx)
+    }
+    renderMeme()
+  })
+})
 
 function drawFrameAroundText(x, y, width, height, padding = 8) {
   const boxX = x - padding

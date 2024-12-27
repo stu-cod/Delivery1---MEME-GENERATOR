@@ -34,7 +34,7 @@ function _createMeme(imgId) {
 
 function addTxtLine() {
   var line = _createLine()
-  gMeme.lines.unshift(line)
+  gMeme.lines.push(line)
 }
 
 function _createLine() {
@@ -43,6 +43,10 @@ function _createLine() {
     size: 40,
     color: '#ffcc00',
   }
+}
+
+function selectedTxtLine(selectedIdx) {
+  gMeme.selectedLineIdx = selectedIdx
 }
 
 function changeTxtLine() {
