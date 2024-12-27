@@ -20,26 +20,26 @@ function drewImg({ imgUrl, lines }) {
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 
-    drawText(lines[0].txt, gElCanvas.width / 2, gElCanvas.height / 2)
+    drawText(gElCanvas.width / 2, gElCanvas.height / 2, lines[0])
   }
 }
 
-function drawText(text, x, y, fontSize = 40) {
+function drawText(x, y, { txt, size, color }) {
   gCtx.lineWidth = 2
-  gCtx.fillStyle = 'black'
-  gCtx.font = fontSize + 'px Arial'
+  gCtx.fillStyle = color
+  gCtx.font = size + 'px Arial'
 
-  gCtx.fillText(text, x, y)
+  gCtx.fillText(txt, x, y)
 
-  const textMetrics = gCtx.measureText(text)
-  const textWidth = textMetrics.width
-  const textHeight = fontSize
+  const txtMetrics = gCtx.measureText(txt)
+  const txtWidth = txtMetrics.width
+  const txtHeight = size
 
-  drawFrameAroundText({ x, y, width: textWidth, height: textHeight })
+  drawFrameAroundText({ x, y, width: txtWidth, height: txtHeight })
 }
 
-function drawFrameAroundText(textBounds, padding = 10) {
-  const { x, y, width, height } = textBounds
+function drawFrameAroundText(txtBounds, padding = 10) {
+  const { x, y, width, height } = txtBounds
 
   const boxX = x - padding
   const boxY = y - height - padding / 2
@@ -54,8 +54,23 @@ function onSubmit(ev) {
   ev.preventDefault()
 }
 
-function editTxt(elTxt) {
+function onEditTxt(elTxt) {
   setLineTxt(elTxt)
+  renderMeme()
+}
+
+function onEditColor(elColor) {
+  setLineColor(elColor)
+  renderMeme()
+}
+
+function onIncreaseFont() {
+  setFontSize('up')
+  renderMeme()
+}
+
+function onDecreaseFont() {
+  setFontSize('down')
   renderMeme()
 }
 

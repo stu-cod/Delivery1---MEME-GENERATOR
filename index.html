@@ -33,11 +33,14 @@
             <canvas width="400" height="400">
             </canvas>
         </div>
-        <form onsubmit="onSubmit(event)">
-            <label for="text">Edit text:</label>
-            <input oninput="editTxt(value)" type="text" id="text" placeholder="Edit text here">
-        </form>
 
+        <label for="text">Edit text:</label>
+        <input oninput="onEditTxt(value)" type="text" id="text" placeholder="Edit text here">
+
+        <label for="txt-color">Edit text Color:</label>
+        <input onchange="onEditColor(value)" type="color" id="txt-color">
+
+        <button onclick="onIncreaseFont()">+</button><button onclick="onDecreaseFont()">-</button>
         <section class="share">
             <button>save</button>
             <a href="#" onclick="onDownloadMeme(this)" download="MyMeme.gif">
