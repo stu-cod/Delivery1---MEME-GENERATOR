@@ -56,7 +56,7 @@ function drawFrameAroundText(x, y, width, height, padding = 8) {
   const boxX = x - padding
   const boxY = y - height - padding / 2
   const boxWidth = width + padding * 2
-  const boxHeight = height + padding * 2
+  const boxHeight = height + padding * 3
 
   gCtx.strokeStyle = 'black'
   gCtx.strokeRect(boxX, boxY, boxWidth, boxHeight)

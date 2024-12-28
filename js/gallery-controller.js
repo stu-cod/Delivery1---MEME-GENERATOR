@@ -13,8 +13,19 @@ function renderGallery() {
 }
 
 function onImgClick(imgId) {
+  const elEditor = document.querySelector('.meme-editor')
+  const elGallery = document.querySelector('.gallery')
+  elEditor.style.display = 'block'
+  elGallery.style.display = 'none'
   addMeme(imgId)
   onInitMemeEditor()
+}
+
+function onGalleryClick() {
+  const elEditor = document.querySelector('.meme-editor')
+  const elGallery = document.querySelector('.gallery')
+  elEditor.style.display = 'none'
+  elGallery.style.display = 'block'
 }
 
 function onImgInput(ev) {}
