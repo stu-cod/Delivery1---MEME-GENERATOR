@@ -1,13 +1,18 @@
 'use strict'
 
-const gElCanvas = document.querySelector('canvas')
-const gCtx = gElCanvas.getContext('2d')
+let gElCanvas
+let gCtx
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
-function onInit() {
-  renderGallery()
-  console.log()
+function onInitMemeEditor() {
+  gElCanvas = document.querySelector('canvas')
+  gCtx = gElCanvas.getContext('2d')
+  addListeners()
+
+  renderMeme()
 }
 
+//RENDER&DRAW
 function renderMeme() {
   var meme = getMeme()
   drewImg(meme)
@@ -30,41 +35,22 @@ function drawText(x, y, lines) {
     gCtx.fillStyle = color
     gCtx.font = size + 'px Arial'
 
-    gCtx.fillText(txt, x, y)
-
     const txtMetrics = gCtx.measureText(txt)
     const txtWidth = txtMetrics.width
     const txtHeight = size
 
-    line.posX = x
-    line.posY = y
+    line.posX = line.posX ? line.posX : x
+    line.posY = line.posY ? line.posY : y
     line.width = txtWidth
     line.height = txtHeight
 
+    gCtx.fillText(txt, line.posX, line.posY)
+
     if (idx === gMeme.selectedLineIdx) {
-      drawFrameAroundText(x, y, txtWidth, txtHeight)
+      drawFrameAroundText(line.posX, line.posY, txtWidth, txtHeight)
     }
   })
 }
-
-gElCanvas.addEventListener('click', function (event) {
-  gMeme.lines.forEach((line, idx) => {
-    const { posX: x, posY: y, width, height } = line
-    const rect = gElCanvas.getBoundingClientRect()
-    const clickX = event.clientX - rect.left
-    const clickY = event.clientY - rect.top
-
-    if (
-      clickX >= x &&
-      clickX <= x + width &&
-      clickY >= y - height &&
-      clickY <= y
-    ) {
-      selectedTxtLine(idx)
-    }
-    renderMeme()
-  })
-})
 
 function drawFrameAroundText(x, y, width, height, padding = 8) {
   const boxX = x - padding
@@ -76,13 +62,78 @@ function drawFrameAroundText(x, y, width, height, padding = 8) {
   gCtx.strokeRect(boxX, boxY, boxWidth, boxHeight)
 }
 
-function onAddTxtLine() {
-  addTxtLine()
+//DRAG & POS
+function addListeners() {
+  addMouseListeners()
+  addTouchListeners()
+}
+
+function addMouseListeners() {
+  gElCanvas.addEventListener('click', onSelectTxtLine)
+
+  gElCanvas.addEventListener('mousedown', onDown)
+  gElCanvas.addEventListener('mousemove', onMove)
+  gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+  gElCanvas.addEventListener('touchstart', onDown)
+  gElCanvas.addEventListener('touchmove', onMove)
+  gElCanvas.addEventListener('touchend', onUp)
+}
+
+function onDown(ev) {
+  // Get the ev pos from mouse or touch
+  const pos = getEvPos(ev)
+  // console.log('pos', pos)
+  if (!getClickedLine(pos).isClicked) return
+
+  setLineDrag(true)
+  //Save the pos we start from
+  document.body.style.cursor = 'grabbing'
+}
+
+function onMove(ev) {
+  const line = chosenLine()
+  const { isDrag } = line
+  if (!isDrag) return
+  const { posX: x, posY: y } = line
+  const pos = getEvPos(ev)
+  // Calc the delta, the diff we moved
+  const dx = pos.x - x
+  const dy = pos.y - y
+  moveLine(dx, dy)
   renderMeme()
 }
 
-function onChangeTxtLine() {
-  changeTxtLine()
+function onUp() {
+  setLineDrag(false)
+  document.body.style.cursor = 'pointer'
+}
+
+//CHOSE
+function onSelectTxtLine(ev) {
+  const pos = getEvPos(ev)
+  if (!getClickedLine(pos).isClicked) return
+  const selectedIdx = getClickedLine(pos).lineIdx
+
+  selectLine(selectedIdx)
+  renderMeme()
+}
+
+function onChangeLine() {
+  changeLine()
+  renderMeme()
+}
+
+function onAddLine() {
+  addLine()
+  renderMeme()
+}
+
+//EDIT
+function onRemoveLine() {
+  RemoveLine()
   renderMeme()
 }
 
@@ -106,6 +157,7 @@ function onDecreaseFont() {
   renderMeme()
 }
 
+//share
 function onDownloadMeme(elLink) {
   const imgContent = gElCanvas.toDataURL('image/jpeg')
   elLink.href = imgContent

@@ -1,4 +1,7 @@
 'use strict'
+function onInit() {
+  renderGallery()
+}
 
 function renderGallery() {
   const strHtmls = gImgs.map((img) => {
@@ -11,7 +14,7 @@ function renderGallery() {
 
 function onImgClick(imgId) {
   addMeme(imgId)
-  renderMeme()
+  onInitMemeEditor()
 }
 
 function onImgInput(ev) {}
