@@ -1,0 +1,21 @@
+.main-navbar {
+  display: flex;
+  gap: 2em;
+}
+
+.nav-btn {
+  color: var(--clr-myBlue);
+  font-size: 1em;
+  font-weight: bold;
+
+  background-color: #ffffff;
+  border-radius: 1em;
+  padding: 0.5em 2em;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.nav-btn:hover {
+  font-size: large;
+  background-color: var(--clr-SkyBlue);
+}

@@ -1,0 +1,10 @@
+.main-logo {
+  color: rgb(101, 101, 101);
+  text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black,
+    -1px 1px 0 black;
+  font-size: 2em;
+}
+
+.main-logo span {
+  color: var(--clr-SkyBlue);
+}

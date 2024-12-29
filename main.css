@@ -9,8 +9,11 @@
 
 /* COMPONENTS */
 @import url('css/components/main-header.css');
+@import url('css/components/main-logo.css');
+@import url('css/components/main-navbar.css');
 @import url('css/components/canvas.css');
 @import url('css/components/gallery.css');
+@import url('css/components/filtering-btns.css');
 
 /* MQ */
 @import url('css/setup/mq.css');

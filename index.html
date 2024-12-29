@@ -9,19 +9,19 @@
 </head>
 
 <body class="main-layout" onload="onInit()">
-    <header class="main-layout">
-        <div class="main-header flex justify-between align-center">
-            <h2 class="logo">StuMEME</h2>
-            <ul class="clean-list flex clean-list">
+    <header class=" main-layout main-header full">
+        <div class="flex justify-between align-center">
+            <h2 class="main-logo">Stu<span>M</span>e<span>M</span>e</h2>
+            <ul class="main-navbar clean-list">
                 <li>
-                    <button onclick="onGalleryClick()">gallery</button>
+                    <button class="nav-btn" onclick="onGalleryClick()">gallery</button>
                 </li>
                 <li>
-                    <button>saved</button>
+                    <button class="nav-btn">saved</button>
 
                 </li>
                 <li>
-                    <button>about</button>
+                    <button class="nav-btn">about</button>
                 </li>
             </ul>
 
@@ -55,22 +55,25 @@
     </section>
 
     <section class="gallery">
-        <section class="filtering">
-            <input class="search" type="text" oninput="" />
-            <button class="search" onclick="">
-                search
-            </button>
-
-            <button>happy</button>
-            <button>sad</button>
-            <button>sarcastic</button>
-            <button>crazy</button>
-            <button>funny</button>
+        <section class="filtering flex justify-between align-center">
+            <div>
+                <input class="search" type="text" oninput="" />
+                <button class="search-btn" onclick="">
+                    search
+                </button>
+            </div>
+            <div class="filtering-btns">
+                <button>happy</button>
+                <button>sad</button>
+                <button>sarcastic</button>
+                <button>crazy</button>
+                <button>funny</button>
+            </div>
         </section>
 
-        <section class="upload">
-            <input type="file" onchange="onImgInput(event)" />
-            <button onclick="onAddImg()">add</button>
+        <section class="file-upload">
+            <input id="hidden-file-input" style="display: none;" type="file" onchange="onImgInput(event)" />
+            <button onclick="triggerFileInput()" class="upload-btn">+</button>
         </section>
 
         <div class="imgs gallery-layout">

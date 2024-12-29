@@ -38,3 +38,7 @@ function onAddImg() {
   addImg(url, keyWord)
   renderGallery()
 }
+
+function triggerFileInput() {
+  document.getElementById('hidden-file-input').click()
+}
